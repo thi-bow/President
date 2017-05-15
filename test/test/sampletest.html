@@ -1,0 +1,124 @@
+﻿<!doctype html>
+
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+   
+
+    <title>ノベルゲーム</title>
+
+
+    
+    <link href="../css/sample.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+    <script src="../js/message_view.js" type="text/javascript">
+</script>
+
+
+    <script>
+new Audio('famipop4.mp3').play();
+
+        document.addEventListener("DOMContentLoaded", function() 
+{
+
+            var message = new MessageViewer({
+    "data": [{
+        "side_class": "right",
+        "name": "キャラクター1",
+        "message":"ノベルゲームテスト。<br>授業のノベルゲームのテスト。",
+        "img_url": "../img/sample001/character_0001.png"
+    },
+    {
+        "message":"同じキャラクターでのテスト。<br>改行テスト。"
+    },
+    {
+        "side_class": "left",
+        "name": "キャラクター2",
+        "message":"テスト2ページ目<br>改行",
+        "img_url": "../img/sample001/character_0002.png"
+    },
+    {
+        "message":"同じキャラクターでのテスト。"
+    },
+       {
+        "side_class": "center",
+        "name": "キャラクター3",
+        "message":"テスト3ページ目<br>改行",
+        "img_url": "../img/sample001/character_0003.png"
+    },
+    {
+        "message":"終わり"
+    }
+],
+
+    "option": {
+        "loop": false
+    }
+　　　　},
+
+function() {
+   document.location.href = "end.html";
+}
+);
+
+ },　false);
+
+
+
+    </script>
+
+
+</head>
+
+
+<body>
+
+
+<section id="sample" class="sample001">
+
+
+
+
+
+<div class="jumbotron top">
+
+    <div class="container">
+
+
+        
+
+
+
+        <div class="messageView" id="default">
+ 
+           <div class="mv-contents">
+ 
+               <p class="mv-name"></p>
+ 
+               <div class="mv-comment">
+  
+                  <p class="val"></p>
+ 
+                   <p class="pointer"></p>
+
+                </div>
+
+                <p class="mv-image character"><img src="" alt=""/></p>
+
+            </div>
+
+        </div>
+
+
+
+    </body>
+
+</html>
