@@ -1,0 +1,35 @@
+<!doctype html>
+
+
+<html>
+  <head>
+
+    <title>sample</title>
+
+    <!--外部ファイル読み込み-->
+    <link rel="stylesheet" type="text/css" href="css/title.css" />
+    <script type="text/javascript" src="js/title.js"></script>
+
+
+  </head>
+  <body>
+    <h1>キャラクターを選んでください</h1>
+    <br>
+
+    <!--画像表示-->
+    <div>
+      <img id="chara" src="image/chara/0.png">
+      <img id="chara" src="image/chara/1.png">
+      <img id="chara" src="image/chara/2.png">
+    </div>
+
+    <!--ボタン表示-->
+    <form>                                <!--押されたときに実行したい関数-->
+      <input type="button" value="太郎君" onclick="CharaSelect(0)" />
+      <input type="button" value="花子さん" onclick="CharaSelect(1)" />
+      <input type="button" value="イチロー" onclick="CharaSelect(2)" />
+    </form>
+
+
+  </body>
+</html>

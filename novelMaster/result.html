@@ -1,0 +1,43 @@
+﻿<html>
+<head>
+<title>result</title>
+</head>
+
+<body>
+
+<p>仮リザルト画面</p>
+ <input id = "point" type="text" value="xxx">
+ <div id = "aaa"></div>
+
+<script src="js/jquery.min.js"></script>
+<script>
+
+var get = getdata();
+document.getElementById("point").value = "人気度:"+get;
+
+var count = localStorage.getItem("imgNo");
+$("#aaa").html(count);
+
+function getdata()
+{
+    /* URLの「?」以降のパラメータを変数nに代入 */
+    var pram = window.location.search.substring(1,window.location.search.length);
+    var pair = pram.split("&");
+
+    var i=temp="";
+    var key=new Array();
+    for (i=0; i < pair.length; i++)
+    {
+      /* 配列の値を「=」で分割 */
+      temp=pair[i].split("=");
+      keyName=temp[0];
+      keyValue=temp[1];
+      /* キーと値の連想配列を生成 */
+      key[keyName]=keyValue;
+    }
+    return keyValue;
+}
+</script>
+</body>
+
+</html>
