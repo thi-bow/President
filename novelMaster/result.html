@@ -1,22 +1,71 @@
 ﻿<html>
 <head>
 <title>result</title>
+<style>
+#p
+{
+  text-align: center;
+  color: red;
+  font-size: 30px;
+}
+#chara
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#point
+{
+  text-align: center;
+  font-size: 30px;
+  color: red;
+}
+#result
+{
+  text-align: center;
+  font-size: 30px;
+  color: red;
+}
+#title_button
+{
+  text-align: center;
+}
+</style>
 </head>
 
 <body>
+<p id = "p">
+  リザルト
+</p>
 
-<p>仮リザルト画面</p>
- <input id = "point" type="text" value="xxx">
- <div id = "aaa"></div>
+<div id = "canvas">
+  <img id = "chara" src="">
+</div>
+<p id = "point"></p>
+<p id = "result"></p>
 
 <script src="js/jquery.min.js"></script>
 <script>
-
 var get = getdata();
-document.getElementById("point").value = "人気度:"+get;
+document.getElementById("point").innerHTML = "人気度:"+get;
 
-var count = localStorage.getItem("imgNo");
-$("#aaa").html(count);
+var imgname = localStorage.getItem("imgNo");
+document.getElementById("chara").src = "image/chara/" + imgname;
+
+if(parseInt(get) >=200)
+{
+  document.getElementById("result").innerHTML = "当選確実!";
+}
+else if(parseInt(get) >=100)
+{
+  document.getElementById("result").innerHTML = "互角!";
+  document.getElementById("result").style.color = "black";
+}
+else
+{
+  document.getElementById("result").innerHTML = "落選!";
+  document.getElementById("result").style.color = "blue";
+}
 
 function getdata()
 {
@@ -37,7 +86,12 @@ function getdata()
     }
     return keyValue;
 }
+
 </script>
+
+<div id = "title_button">
+<input id='button1' type='button' value='タイトルへ戻る' onClick="location.href='title.html'">
+</div>
 </body>
 
 </html>

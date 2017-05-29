@@ -90,10 +90,10 @@
 
 <script src="js/jquery.min.js"></script>
 <script>
-//var audio = new Audio('sound/BGM仮.mp3');
-//audio.play();
-//audio.loop = true;
-new Audio('sound/拍手.mp3').play();
+var audio = new Audio('sound/BGM.mp3');
+audio.play();
+audio.loop = true;
+new Audio('sound/patipati.mp3').play();
   //URLの「?」以降のパラメータを変数nに代入
 var data = window.location.search.substring(1,window.location.search.length) + ".png";
   //読み込み
@@ -187,7 +187,7 @@ function choice01()
 	var bt = document.getElementById("button1");
 	localStorage.setItem("pointValue",num);
 	localStorage.setItem("imgNo", data);
-	localStorage.setItem("seNo","拍手.mp3");
+	localStorage.setItem("seNo","patipati.mp3");
 	bt.type = "submit";
 	bt.value = num;
 	bt.submit();
@@ -199,7 +199,7 @@ function choice02()
 	var bt = document.getElementById("button2");
 	localStorage.setItem("pointValue",num);
 	localStorage.setItem("imgNo", data);
-	localStorage.setItem("seNo","歓声大.mp3");
+	localStorage.setItem("seNo","Waa.mp3");
 	bt.type = "submit";
 	bt.value = num;
 	bt.submit();
@@ -211,7 +211,7 @@ function choice03()
 	var bt = document.getElementById("button3");
 	localStorage.setItem("pointValue",num);
 	localStorage.setItem("imgNo", data);
-	localStorage.setItem("seNo","ブーイング.mp3");
+	localStorage.setItem("seNo","Boo.mp3");
 	bt.type = "submit";
 	bt.value = num;
 	bt.submit();
