@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ノベルゲームシーン１</title>
+
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+<style type="text/css">
+#canvas{
+	z-index: 1;
+	width: 800px;
+	height: 600px;
+	border: 1px solid gray;
+}
+#serif{
+	z-index: 2;
+	position: relative;
+	top: 350px;
+	left: 100px;
+	width: 600px;
+	height: 200px;
+	border: 1px solid blue;
+	background-color: rgba(255, 255, 255, 0.75);
+	padding: 10px;
+	user-select: none;
+	font-family: "Rounded Mplus 1c";
+	font-size: 18pt;
+}
+</style>
+
+<style>
+#button1
+{
+	z-index: 3;
+	position: absolute;
+	top: 100px;
+	left: 250px;
+	width: 300px;
+	height: 50px;
+	opacity: 0;
+}
+#button2
+{
+	z-index: 3;
+	position: absolute;
+	top: 200px;
+	left: 250px;
+	width: 300px;
+	height: 50px;
+	opacity: 0;
+}
+#button3
+{
+	z-index: 3;
+	position: absolute;
+	top: 300px;
+	left: 250px;
+	width: 300px;
+	height: 50px;
+	opacity: 0;
+}
+#chara1
+{
+	position: absolute;
+	top: 80px;
+	left: 100px;
+	width: 300px;
+	height: 300px;
+}
+</style>
+
+</head>
+<body>
+
+<form name="form1" action="index2.html" method="get">
+
+<button id = "button1" disabled="true" type="button" name = "point" value= "0" onclick="choice02()">
+	<strong>我々は、これからもいつだってアソだ。</strong>
+</button>
+<button id = "button2" disabled="true" type="button" name = "point" value= "0" onclick="choice01()">
+	<strong>我々は、これからもいつだって世界の王だ</strong>
+</button>
+<button id = "button3" disabled="true" type="button" name = "point" value= "0" onclick="choice03()">
+	<strong>我々は、これからもいつだって下を脱いでいる</strong>
+</button>
+
+</form>
+<image id="chara1" src = "image/chara/0.png">
+
+<div id="canvas">
+	<div id="serif"></div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script>
+var audio = new Audio('sound/BGM.mp3');
+audio.play();
+audio.loop = true;
+new Audio('sound/patipati.mp3').play();
+  //URLの「?」以降のパラメータを変数nに代入
+var data = window.location.search.substring(1,window.location.search.length) + ".png";
+  //読み込み
+document.getElementById("chara1").src = "image/chara/"+ data;
+
+localStorage.setItem("pointValue",0);
+var num = 0;
+var count = localStorage.getItem("pointValue");
+num = count;
+
+var SCENARIO = [
+	  {com:"BG", val:"url(image/BackGround.png)"}
+	, {com:"S",  val:"もし、まだ疑いを抱いている人がいるとしたら ― この国はあらゆることが実現可能な場所であることに、建国者たちの夢が現在も生きていることに、民主政治の力に、疑いを抱いている人がいるとしたら、今晩がその答えだ。"}
+	, {com:"S",  val:"これは、この国の歴史上かつてない程に並んだ学校や教会の行列が、多くはその人生において初めてそこに3時間も4時間も並んだ人々が出した答えだ。　今回は違うに違いない、今回は彼らの声が違いを生み出すに違いないと信じた彼らが出した答えだ。"}
+	, {com:"S",  val:"これは、若い人とお年寄り、金持ちと貧しい人、民主党員と共和党員、黒人、白人、ヒスパニック、ゲイとストレート、障害者と非障害者たちが出した答えだ。この国はただの個々人の集合体ではない、ただの変人の集合体ではない,ということを世界に示した人たちだ。"}
+	,{com:"Choices1"}
+	,
+];
+
+var Novel =
+{
+	  cursor: 0, max: 0,
+		init: function()
+		{
+		this.max = SCENARIO.length;
+		this.play();
+	}
+	, play: function()
+	{
+		if( this.cursor >= this.max )
+		{
+			return(false);
+		}
+
+		switch(SCENARIO[this.cursor].com)
+		{
+			// セリフ再生
+			case "S":
+				$("#serif").html(SCENARIO[this.cursor].val);
+				this.cursor++;
+				break;
+
+			// 背景変更
+			case "BG":
+				$("#canvas").css("background-image", SCENARIO[this.cursor].val);
+				this.cursor++;
+				Novel.play();
+				break;
+
+				//選択肢表示
+				case "Choices1":
+				document.getElementById("button1").disabled = false;
+				document.getElementById("button2").disabled = false;
+				document.getElementById("button3").disabled = false;
+				$('#button1').css("opacity",1);
+				$('#button2').css("opacity",1);
+				$('#button3').css("opacity",1);
+				break;
+
+				case "CloseChoice":
+				document.getElementById("button1").disabled = true;
+				document.getElementById("button2").disabled = true;
+				document.getElementById("button3").disabled = true;
+				$('#button1').css("opacity",0);
+				$('#button2').css("opacity",0);
+				$('#button3').css("opacity",0);
+				break;
+
+			default:
+			break;
+		}
+	}
+};
+
+$(document).ready(function()
+{
+	Novel.init();
+
+	$("#serif")
+		.on("click", function(){
+			Novel.play();
+		});
+});
+
+//選択肢を選んだ時実行
+function choice01()
+{
+	num = parseInt(num) + 50;
+	var bt = document.getElementById("button2");
+	localStorage.setItem("pointValue",num);
+	localStorage.setItem("imgNo", data);
+	localStorage.setItem("seNo","patipati.mp3");
+	bt.type = "submit";
+	bt.value = num;
+	bt.submit();
+	return true;
+}
+function choice02()
+{
+	num = parseInt(num) + 100;
+	var bt = document.getElementById("button1");
+	localStorage.setItem("pointValue",num);
+	localStorage.setItem("imgNo", data);
+	localStorage.setItem("seNo","Waa.mp3");
+	bt.type = "submit";
+	bt.value = num;
+	bt.submit();
+	return true;
+}
+function choice03()
+{
+	num = parseInt(num) + 10;
+	var bt = document.getElementById("button3");
+	localStorage.setItem("pointValue",num);
+	localStorage.setItem("imgNo", data);
+	localStorage.setItem("seNo","Boo.mp3");
+	bt.type = "submit";
+	bt.value = num;
+	bt.submit();
+	return true;
+}
+
+</script>
+</body>
+</html>
